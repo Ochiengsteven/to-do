@@ -200,6 +200,6 @@ If you like this project, create a pull request or hit me up on [Twitter](https:
 
 ## 📝 License <a name="license"></a>
 
-- This project is [MIT](./LICENSE) licensed. </br>
+- This project is [MIT](https://github.com/Ochiengsteven/to-do/blob/structure/license.md) licensed. </br>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
