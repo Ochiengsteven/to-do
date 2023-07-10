@@ -1,0 +1,16 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+h3 {
+  font-size: 1.5rem;
+  color: red;
+}
+
+img {
+  width: 60%;
+  height: 40vh;
+  object-fit: cover;
+}
