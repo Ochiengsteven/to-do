@@ -81,3 +81,8 @@ input {
   cursor: pointer;
   text-decoration: underline;
 }
+
+.move {
+    position: absolute;
+    margin-left: 46%;
+}

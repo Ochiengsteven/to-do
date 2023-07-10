@@ -1,12 +1,16 @@
 import './style.css';
 import reload from './assets/reload.png';
 import uncheck from './assets/unchecked.png';
+import dots from './assets/vertical-dots.png';
 
 const reloadIcon = new Image();
 reloadIcon.src = reload;
 
 const uncheckIcon = new Image();
 uncheckIcon.src = uncheck;
+
+const dotsIcon = new Image();
+dotsIcon.src = dots;
 
 const frame = document.querySelector('.container');
 const header = document.createElement('div');
@@ -40,7 +44,7 @@ const tasks = [
 tasks.forEach((task) => {
   const div = document.createElement('div');
   div.classList.add('task');
-  div.innerHTML = `<img src="${uncheckIcon.src}" alt="Uncheck Icon"><p>${task.description}</p>`;
+  div.innerHTML = `<img src="${uncheckIcon.src}" alt="Uncheck Icon"><p>${task.description}</p><img src="${dotsIcon.src}" alt="move" class="move">`;
   frame.appendChild(div);
 });
 
