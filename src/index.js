@@ -41,6 +41,20 @@ const tasks = [
   },
 ];
 
+const form = document.querySelector('.task-form');
+
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const inputTask = document.querySelector('.task-input').value;
+  const myTask = {
+    description: inputTask,
+    completed: false,
+    index: tasks.length + 1,
+  };
+  tasks.push(myTask);
+  document.querySelector('.task-input').value = '';
+});
+
 tasks.forEach((task) => {
   const div = document.createElement('div');
   div.classList.add('task');
