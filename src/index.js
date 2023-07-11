@@ -44,6 +44,7 @@ const tasks = [
 tasks.forEach((task) => {
   const div = document.createElement('div');
   div.classList.add('task');
+  div.setAttribute('id', task.index);
   div.innerHTML = `<img src="${uncheckIcon.src}" alt="Uncheck Icon"><p>${task.description}</p><img src="${dotsIcon.src}" alt="move" class="move">`;
   frame.appendChild(div);
 });
