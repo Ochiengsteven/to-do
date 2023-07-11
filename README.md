@@ -66,7 +66,7 @@
 
 ## 🚀 Live Demo <a name="live-demo"></a>
 
-- You can find the website [here](https://ochiengsteven.github.io/To-Do-List-App/)
+- You can find the website [here](https://64ad1c1de2d45203fa5ea4fd--warm-crepe-4e16ad.netlify.app/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
