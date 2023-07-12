@@ -92,5 +92,12 @@ input {
 }
 
 .deleteico {
-  margin-left: 80%;
+  position: absolute;
+  margin-left: 42%;
+  display: none;
+}
+
+.task:hover .deleteico {
+  display: block;
+  cursor: pointer;
 }
