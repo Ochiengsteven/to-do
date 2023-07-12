@@ -4,6 +4,7 @@ import uncheck from './assets/unchecked.png';
 import dots from './assets/vertical-dots.png';
 import deleteicon from './assets/delete.png';
 import plus from './assets/plus.png';
+import { addTask, removeTask, getTasks } from './modules/taskManager.js';
 
 const plusIcon = new Image();
 plusIcon.src = plus;
@@ -28,11 +29,9 @@ header.appendChild(reloadIcon);
 frame.appendChild(header);
 const taskForm = document.createElement('form');
 taskForm.classList.add('task-form');
-taskForm.innerHTML = `<input type="text" class="task-input" placeholder="Add to your list...">
+taskForm.innerHTML = `<input type="text" class="task-input" placeholder="Add to your list..." required>
                       <img src="${plusIcon.src}" alt="enter" class="add-icon">`;
 frame.appendChild(taskForm);
-
-let tasks = [];
 
 const form = document.querySelector('.task-form');
 const taskInput = document.querySelector('.task-input');
@@ -44,6 +43,8 @@ addedTasks.classList.add('added-tasks');
 frame.appendChild(addedTasks);
 const displayTasks = () => {
   addedTasks.innerHTML = '';
+
+  const tasks = getTasks(); // Retrieve tasks from the task manager module
 
   tasks.forEach((task) => {
     const div = document.createElement('div');
@@ -62,26 +63,28 @@ const displayTasks = () => {
 form.addEventListener('submit', (e) => {
   e.preventDefault();
   const inputTask = taskInput.value;
-  const myTask = {
-    description: inputTask,
-    completed: false,
-    index: Math.floor(Math.random() * 1000), // Generate a random number as the index
-  };
-  tasks.push(myTask);
-  taskInput.value = '';
-  displayTasks();
+  if (inputTask.trim() !== '') {
+    const myTask = {
+      description: inputTask,
+      completed: false,
+      index: Math.floor(Math.random() * 1000),
+    };
+    addTask(myTask); // Add task using the task manager module
+    taskInput.value = '';
+    displayTasks();
+  }
 });
 
 addIcon.addEventListener('click', (e) => {
   e.preventDefault();
   const inputTask = taskInput.value;
-  if (inputTask.trim() !== '') { // Check if the input is not empty or only whitespace
+  if (inputTask.trim() !== '') {
     const myTask = {
       description: inputTask,
       completed: false,
-      index: Math.floor(Math.random() * 1000), // Generate a random number as the index
+      index: Math.floor(Math.random() * 1000),
     };
-    tasks.push(myTask);
+    addTask(myTask); // Add task using the task manager module
     taskInput.value = '';
     displayTasks();
   }
@@ -95,9 +98,9 @@ frame.appendChild(clearAll);
 addedTasks.addEventListener('click', (event) => {
   if (event.target.classList.contains('deleteico')) {
     const taskId = Number(event.target.parentNode.id.split('-')[1]);
-    tasks = tasks.filter((task) => task.index !== taskId);
+    removeTask(taskId); // Remove task using the task manager module
     displayTasks();
-    localStorage.setItem('tasks', JSON.stringify(tasks));
+    localStorage.setItem('tasks', JSON.stringify(getTasks())); // Save updated tasks to local storage
   }
 });
 
@@ -105,7 +108,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const storedTasks = localStorage.getItem('tasks');
 
   if (storedTasks) {
-    tasks = JSON.parse(storedTasks);
+    const tasks = JSON.parse(storedTasks);
+    tasks.forEach((task) => {
+      addTask(task); // Add tasks from local storage using the task manager module
+    });
     displayTasks();
   }
 });
