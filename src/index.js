@@ -3,6 +3,10 @@ import reload from './assets/reload.png';
 import uncheck from './assets/unchecked.png';
 import dots from './assets/vertical-dots.png';
 import deleteicon from './assets/delete.png';
+import plus from './assets/plus.png';
+
+const plusIcon = new Image();
+plusIcon.src = plus;
 
 const reloadIcon = new Image();
 reloadIcon.src = reload;
@@ -24,12 +28,15 @@ header.appendChild(reloadIcon);
 frame.appendChild(header);
 const taskForm = document.createElement('form');
 taskForm.classList.add('task-form');
-taskForm.innerHTML = '<input type="text" class="task-input" placeholder="Add to your list...">';
+taskForm.innerHTML = `<input type="text" class="task-input" placeholder="Add to your list...">
+                      <img src="${plusIcon.src}" alt="enter" class="add-icon">`;
 frame.appendChild(taskForm);
 
 let tasks = [];
 
 const form = document.querySelector('.task-form');
+const taskInput = document.querySelector('.task-input');
+const addIcon = document.querySelector('.add-icon');
 
 const addedTasks = document.createElement('div');
 addedTasks.classList.add('added-tasks');
@@ -54,15 +61,30 @@ const displayTasks = () => {
 
 form.addEventListener('submit', (e) => {
   e.preventDefault();
-  const inputTask = document.querySelector('.task-input').value;
+  const inputTask = taskInput.value;
   const myTask = {
     description: inputTask,
     completed: false,
     index: Math.floor(Math.random() * 1000), // Generate a random number as the index
   };
   tasks.push(myTask);
-  document.querySelector('.task-input').value = '';
+  taskInput.value = '';
   displayTasks();
+});
+
+addIcon.addEventListener('click', (e) => {
+  e.preventDefault();
+  const inputTask = taskInput.value;
+  if (inputTask.trim() !== '') { // Check if the input is not empty or only whitespace
+    const myTask = {
+      description: inputTask,
+      completed: false,
+      index: Math.floor(Math.random() * 1000), // Generate a random number as the index
+    };
+    tasks.push(myTask);
+    taskInput.value = '';
+    displayTasks();
+  }
 });
 
 const clearAll = document.createElement('div');
