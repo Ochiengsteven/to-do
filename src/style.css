@@ -86,3 +86,11 @@ input {
   position: absolute;
   margin-left: 46%;
 }
+
+.added-tasks {
+  width: 100%;
+}
+
+.deleteico {
+  margin-left: 80%;
+}
