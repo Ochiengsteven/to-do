@@ -49,10 +49,28 @@ main {
   margin-left: 1rem;
 }
 
+.task-form {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  /* padding: 1rem; */
+
+  /* border-bottom: 1px solid #ccc; */
+}
+
 .header img,
-.task img {
+.task img,
+.task-form img {
   width: 20px;
   height: 20px;
+}
+
+.task-form img {
+  position: absolute;
+  margin-left: 47%;
+  cursor: pointer;
 }
 
 form {
@@ -85,4 +103,19 @@ input {
 .move {
   position: absolute;
   margin-left: 46%;
+}
+
+.added-tasks {
+  width: 100%;
+}
+
+.deleteico {
+  position: absolute;
+  margin-left: 42%;
+  display: none;
+}
+
+.task:hover .deleteico {
+  display: block;
+  cursor: pointer;
 }
