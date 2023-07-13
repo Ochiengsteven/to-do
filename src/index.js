@@ -102,6 +102,7 @@ addedTasks.addEventListener('click', (event) => {
   }
 });
 
+// edit the description
 addedTasks.addEventListener('input', (event) => {
   if (event.target.tagName === 'P') {
     const taskId = Number(event.target.parentNode.id.split('-')[1]);
