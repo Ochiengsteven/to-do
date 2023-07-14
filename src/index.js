@@ -1,13 +1,13 @@
 import './style.css';
 import reload from './assets/reload.png';
 import uncheck from './assets/unchecked.png';
+import {
+  addTask, removeTask, editTaskDescription, toggleTaskCompleted, clearCompletedTasks, getTasks,
+} from './modules/taskManager.js';
 import dots from './assets/vertical-dots.png';
 import deleteicon from './assets/delete.png';
 import plus from './assets/plus.png';
 import checkedicon from './assets/checked.png';
-import {
-  addTask, removeTask, editTaskDescription, toggleTaskCompleted, clearCompletedTasks, getTasks,
-} from './modules/taskManager.js';
 
 import { toggleCompleted, clearCompleted } from './modules/interaction.js';
 
