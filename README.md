@@ -66,7 +66,7 @@
 
 ## 🚀 Live Demo <a name="live-demo"></a>
 
-- You can find the website [here](https://64ae951033e52800b31ce788--helpful-mochi-f0440f.netlify.app/)
+- You can find the website [here](https://ochiengsteven.github.io/to-do/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
