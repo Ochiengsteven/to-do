@@ -66,7 +66,7 @@
 
 ## 🚀 Live Demo <a name="live-demo"></a>
 
-- You can find the website [here](https://64b14a517876561373d0e485--precious-blancmange-bbcdcf.netlify.app/)
+- You can find the website [here](https://ochiengsteven.github.io/to-do/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
