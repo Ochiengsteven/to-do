@@ -6,8 +6,10 @@ import deleteicon from './assets/delete.png';
 import plus from './assets/plus.png';
 import checkedicon from './assets/checked.png';
 import {
-  addTask, removeTask, editTaskDescription, toggleTaskCompleted, clearCompletedTasks, getTasks,
+  addTask, removeTask, editTaskDescription, getTasks,
 } from './modules/taskManager.js';
+
+import { toggleTaskCompleted, clearCompletedTasks } from './modules/interaction.js';
 
 const plusIcon = new Image();
 plusIcon.src = plus;
