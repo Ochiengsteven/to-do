@@ -33,6 +33,18 @@ header.classList.add('header');
 header.innerHTML = '<h1>Todo List</h1>';
 header.appendChild(reloadIcon);
 frame.appendChild(header);
+
+// Add a click event listener to the reloadIcon image
+reloadIcon.addEventListener('click', () => {
+  // Apply the rotation animation to the reloadIcon
+  reloadIcon.style.animation = 'rotate 1s linear 2';
+
+  // Reset the animation after it completes
+  setTimeout(() => {
+    reloadIcon.style.animation = '';
+  }, 2000);
+});
+
 const taskForm = document.createElement('form');
 taskForm.classList.add('task-form');
 taskForm.innerHTML = `<input type="text" class="task-input" placeholder="Add to your list...">
