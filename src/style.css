@@ -44,9 +44,11 @@ main {
 }
 
 .task p {
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-weight: 500;
   margin-left: 1rem;
+  border: none;
+  outline: none;
 }
 
 .task-form {
