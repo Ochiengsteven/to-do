@@ -4,8 +4,9 @@ import uncheck from './assets/unchecked.png';
 import dots from './assets/vertical-dots.png';
 import deleteicon from './assets/delete.png';
 import plus from './assets/plus.png';
+import checkedicon from './assets/checked.png';
 import {
-  addTask, removeTask, editTaskDescription, getTasks,
+  addTask, removeTask, editTaskDescription, toggleTaskCompleted, clearCompletedTasks, getTasks,
 } from './modules/taskManager.js';
 
 const plusIcon = new Image();
@@ -22,6 +23,9 @@ dotsIcon.src = dots;
 
 const deleteIcon = new Image();
 deleteIcon.src = deleteicon;
+
+const checkedIcon = new Image();
+checkedIcon.src = checkedicon;
 
 const frame = document.querySelector('.container');
 const header = document.createElement('div');
@@ -48,13 +52,16 @@ const displayTasks = () => {
 
   const tasks = getTasks();
 
-  // eslint-disable-next-line no-unused-vars
-  tasks.forEach((task, index) => {
+  tasks.forEach((task) => {
     const div = document.createElement('div');
     div.classList.add('task');
     div.setAttribute('id', `task-${task.index}`);
-    div.innerHTML = `<img src="${uncheckIcon.src}" alt="Uncheck Icon">
-                     <p contenteditable>${task.description}</p>
+    const checkboxClass = task.completed ? 'checkico' : 'uncheckico';
+    const pClass = task.completed ? 'completed' : '';
+    const checkboxIcon = task.completed ? checkedIcon.src : uncheckIcon.src;
+    const checkboxAlt = task.completed ? 'Checked Icon' : 'Unchecked Icon';
+    div.innerHTML = `<img src="${checkboxIcon}" alt="${checkboxAlt}" class="${checkboxClass}">
+                     <p class="${pClass}" contenteditable>${task.description}</p>
                      <img src="${deleteIcon.src}" alt="deleteico" class="deleteico">
                      <img src="${dotsIcon.src}" alt="move" class="move">`;
     addedTasks.appendChild(div);
@@ -62,6 +69,11 @@ const displayTasks = () => {
 
   localStorage.setItem('tasks', JSON.stringify(tasks));
 };
+
+const clearAll = document.createElement('div');
+clearAll.classList.add('clear-all');
+clearAll.innerHTML = '<p>Clear All Completed</p>';
+frame.appendChild(clearAll);
 
 form.addEventListener('submit', (e) => {
   e.preventDefault();
@@ -102,7 +114,7 @@ addedTasks.addEventListener('click', (event) => {
   }
 });
 
-// edit the description
+// Edit the description
 addedTasks.addEventListener('input', (event) => {
   if (event.target.tagName === 'P') {
     const taskId = Number(event.target.parentNode.id.split('-')[1]);
@@ -122,4 +134,21 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     displayTasks();
   }
+});
+
+// Marking tasks as completed
+addedTasks.addEventListener('click', (event) => {
+  if (event.target.classList.contains('checkico') || event.target.classList.contains('uncheckico')) {
+    const taskId = Number(event.target.parentNode.id.split('-')[1]);
+    toggleTaskCompleted(taskId);
+    displayTasks();
+    localStorage.setItem('tasks', JSON.stringify(getTasks()));
+  }
+});
+
+// Clear All Completed
+clearAll.addEventListener('click', () => {
+  clearCompletedTasks();
+  displayTasks();
+  localStorage.setItem('tasks', JSON.stringify(getTasks()));
 });

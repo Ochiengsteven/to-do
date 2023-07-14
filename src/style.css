@@ -121,3 +121,14 @@ input {
   display: block;
   cursor: pointer;
 }
+
+.task img:nth-child(2) {
+  display: none;
+  width: 15px;
+  height: 15px;
+}
+
+.completed {
+  text-decoration: line-through;
+  color: #ccc;
+}
