@@ -132,3 +132,12 @@ input {
   text-decoration: line-through;
   color: #ccc;
 }
+
+@keyframes rotateAnimation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(720deg);
+  }
+}
