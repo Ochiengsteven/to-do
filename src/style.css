@@ -56,10 +56,6 @@ main {
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  /* padding: 1rem; */
-
-  /* border-bottom: 1px solid #ccc; */
 }
 
 .header img,
@@ -67,6 +63,7 @@ main {
 .task-form img {
   width: 20px;
   height: 20px;
+  cursor: pointer;
 }
 
 .task-form img {
@@ -131,13 +128,4 @@ input {
 .completed {
   text-decoration: line-through;
   color: #ccc;
-}
-
-@keyframes rotateAnimation {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(720deg);
-  }
 }
