@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import './style.css';
 import reload from './assets/reload.png';
 import uncheck from './assets/unchecked.png';
@@ -112,6 +111,7 @@ addIcon.addEventListener('click', (e) => {
   }
 });
 
+toggleCompleted();
 addedTasks.addEventListener('click', (event) => {
   if (event.target.classList.contains('deleteico')) {
     const taskId = Number(event.target.parentNode.id.split('-')[1]);
@@ -159,3 +159,5 @@ clearAll.addEventListener('click', () => {
   displayTasks();
   localStorage.setItem('tasks', JSON.stringify(getTasks()));
 });
+
+clearCompleted();
