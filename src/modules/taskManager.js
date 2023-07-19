@@ -19,7 +19,6 @@ export function removeTask(taskId) {
   updateIndexes();
 }
 
-// Function for testing purposes
 export function removeTaskForTesting(taskId) {
   const updatedTasks = tasks.filter((task) => task.index !== taskId);
   updateIndexes(updatedTasks);

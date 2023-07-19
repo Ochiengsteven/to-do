@@ -22,9 +22,6 @@ describe('addTask', () => {
     expect(tasks).toHaveLength(0);
 
     // Add multiple tasks
-    addTask('Task 1');
-    addTask('Task 2');
-    addTask('Task 3');
 
     // After adding multiple tasks, tasks array should contain all the added tasks
     expect(tasks).toHaveLength(3);
@@ -35,11 +32,6 @@ describe('addTask', () => {
 describe('removeTask', () => {
   beforeEach(() => {
     tasks.length = 0; // Reset tasks before each test
-    tasks.push(
-      { index: 1, name: 'Task 1' },
-      { index: 2, name: 'Task 2' },
-      { index: 3, name: 'Task 3' },
-    );
   });
 
   it('should remove a task from the tasks array', () => {
