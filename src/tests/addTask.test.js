@@ -39,6 +39,11 @@ describe("addTask", () => {
 describe("removeTask", () => {
   beforeEach(() => {
     tasks.length = 0; // Reset tasks before each test
+    tasks.push(
+      { index: 1, name: "Task 1" },
+      { index: 2, name: "Task 2" },
+      { index: 3, name: "Task 3" }
+    );
   });
 
   it("should remove a task from the tasks array", () => {
