@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 // eslint-disable-next-line import/no-mutable-exports
 let tasks = [];
 
@@ -47,3 +48,28 @@ export function clearCompletedTasks() {
 export function getTasks() {
   return tasks;
 }
+
+export const displayTasks = () => {
+  const addedTasks = document.createElement('div');
+  addedTasks.classList.add('added-tasks');
+  addedTasks.innerHTML = '';
+
+  const tasks = getTasks();
+
+  tasks.forEach((task) => {
+    const div = document.createElement('div');
+    div.classList.add('task');
+    div.setAttribute('id', `task-${task.index}`);
+    const checkboxClass = task.completed ? 'checkico' : 'uncheckico';
+    const pClass = task.completed ? 'completed' : '';
+    const checkboxIcon = task.completed ? checkedIcon.src : uncheckIcon.src;
+    const checkboxAlt = task.completed ? 'Checked Icon' : 'Unchecked Icon';
+    div.innerHTML = `<img src="${checkboxIcon}" alt="${checkboxAlt}" class="${checkboxClass}">
+                     <p class="${pClass}" contenteditable>${task.description}</p>
+                     <img src="${deleteIcon.src}" alt="deleteico" class="deleteico">
+                     <img src="${dotsIcon.src}" alt="move" class="move">`;
+    addedTasks.appendChild(div);
+  });
+
+  localStorage.setItem('tasks', JSON.stringify(tasks));
+};

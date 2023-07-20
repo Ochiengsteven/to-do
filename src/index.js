@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 import './style.css';
 import reload from './assets/reload.png';
 import uncheck from './assets/unchecked.png';
@@ -53,7 +54,7 @@ const addedTasks = document.createElement('div');
 addedTasks.classList.add('added-tasks');
 
 frame.appendChild(addedTasks);
-const displayTasks = () => {
+export const displayTasks = () => {
   addedTasks.innerHTML = '';
 
   const tasks = getTasks();
