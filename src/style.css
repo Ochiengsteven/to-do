@@ -56,10 +56,6 @@ main {
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  /* padding: 1rem; */
-
-  /* border-bottom: 1px solid #ccc; */
 }
 
 .header img,
@@ -67,6 +63,7 @@ main {
 .task-form img {
   width: 20px;
   height: 20px;
+  cursor: pointer;
 }
 
 .task-form img {
@@ -120,4 +117,15 @@ input {
 .task:hover .deleteico {
   display: block;
   cursor: pointer;
+}
+
+.task img:nth-child(2) {
+  display: none;
+  width: 15px;
+  height: 15px;
+}
+
+.completed {
+  text-decoration: line-through;
+  color: #ccc;
 }
