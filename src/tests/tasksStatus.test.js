@@ -1,7 +1,7 @@
 // Import the required functions and modules
 const { toggleTaskCompleted, getTasks } = require('../modules/taskManager.js');
 
-// Helper function to create a task object
+// Function to create a task object
 const createTask = (index, description, completed = false) => ({
   index,
   description,
