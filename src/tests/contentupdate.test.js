@@ -11,7 +11,6 @@ import {
   getTasks,
 } from '../modules/taskManager.js';
 
-// Sample test data
 const sampleTask = {
   description: 'Sample Task',
   completed: false,
