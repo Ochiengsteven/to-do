@@ -28,7 +28,6 @@ global.window = dom.window;
 global.TextEncoder = dom.window.TextEncoder;
 global.TextDecoder = dom.window.TextDecoder;
 
-
 describe('Task Manager Functions', () => {
   // Set up a fresh DOM environment before each test
   beforeEach(() => {
