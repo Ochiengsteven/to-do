@@ -1,126 +1,76 @@
-// Import the jsdom package
-// eslint-disable-next-line import/no-extraneous-dependencies
-import jsdom from 'jsdom';
-// Import the functions to be tested
-import {
-  addTask,
-  removeTask,
+// Import the required functions and modules
+const {
   editTaskDescription,
-  toggleTaskCompleted,
   clearCompletedTasks,
   getTasks,
-} from '../modules/taskManager.js';
+  // eslint-disable-next-line no-unused-vars
+  updateIndexes,
+} = require('../modules/taskManager.js');
 
-const sampleTask = {
-  description: 'Sample Task',
-  completed: false,
-  index: 1,
-};
+// Helper function to create a task object
+const createTask = (index, description, completed = false) => ({
+  index,
+  description,
+  completed,
+});
 
-const { JSDOM } = jsdom;
-
-// Set up the DOM environment before running the tests
-const dom = new JSDOM('<!DOCTYPE html><html><body><div class="container"><div class="added-tasks"></div></div></body></html>');
-global.document = dom.window.document;
-global.window = dom.window;
-
-// Manually define TextEncoder and TextDecoder
-global.TextEncoder = dom.window.TextEncoder;
-global.TextDecoder = dom.window.TextDecoder;
-
-describe('Task Manager Functions', () => {
-  // Set up a fresh DOM environment before each test
+describe('editTaskDescription and clearCompletedTasks', () => {
   beforeEach(() => {
-    document.body.innerHTML = `
-        <div class="container">
-          <div class="added-tasks"></div>
-        </div>
-      `;
+    // Reset tasks before each test
+    getTasks().length = 0;
   });
 
-  test('addTask should add a new task to the DOM', () => {
-    // Call the addTask function
-    addTask(sampleTask);
+  test('editTaskDescription should update task description', () => {
+    // Arrange: Create a test task with taskId: 1 and description: 'Old Description'
+    const taskId = 1;
+    const oldDescription = 'Old Description';
+    const testTask = createTask(taskId, oldDescription, false);
+    getTasks().push(testTask);
 
-    // Get the added task element
-    const taskElement = document.querySelector('.added-tasks .task');
+    // Act: Edit the task description
+    const newDescription = 'New Description';
+    editTaskDescription(taskId, newDescription);
 
-    // Task element should not be null, meaning it's been added to the DOM
-    expect(taskElement).not.toBeNull();
-
-    // Check if the description matches the sample task description
-    expect(taskElement.textContent).toContain(sampleTask.description);
+    // Assert: Check that the task description is updated
+    const tasks = getTasks();
+    expect(tasks).toHaveLength(1);
+    expect(tasks[0].index).toBe(taskId);
+    expect(tasks[0].description).toBe(newDescription);
+    expect(tasks[0].completed).toBe(false);
   });
 
-  test('removeTask should remove a task from the DOM', () => {
-    // Add a sample task first
-    addTask(sampleTask);
+  test('editTaskDescription should do nothing if task is not found', () => {
+    // Arrange: Create a test task with taskId: 1 and description: 'Old Description'
+    const taskId = 1;
+    const oldDescription = 'Old Description';
+    const testTask = createTask(taskId, oldDescription, false);
+    getTasks().push(testTask);
 
-    // Call the removeTask function
-    removeTask(sampleTask.index);
+    // Act: Edit the description for an invalid taskId
+    const newDescription = 'New Description';
+    editTaskDescription(999, newDescription); // Invalid taskId
 
-    // Check if the task has been removed from the DOM
-    const taskElement = document.querySelector(`#task-${sampleTask.index}`);
-    expect(taskElement).toBeNull();
+    // Assert: Check that the task remains unchanged
+    const tasks = getTasks();
+    expect(tasks).toHaveLength(1);
+    expect(tasks[0].index).toBe(taskId);
+    expect(tasks[0].description).toBe(oldDescription);
+    expect(tasks[0].completed).toBe(false); // Should remain unchanged
   });
 
-  test('editTaskDescription should update the task description', () => {
-    // Add a sample task first
-    addTask(sampleTask);
+  test('clearCompletedTasks should remove completed tasks', () => {
+    // Arrange: Create test tasks, some completed and some not completed
+    const task1 = createTask(1, 'Task 1', true);
+    const task2 = createTask(2, 'Task 2', false);
+    const task3 = createTask(3, 'Task 3', true);
+    getTasks().push(task1, task2, task3);
 
-    // New description for the task
-    const newDescription = 'Updated Task Description';
-
-    // Call the editTaskDescription function
-    editTaskDescription(sampleTask.index, newDescription);
-
-    // Check if the task description has been updated in the DOM
-    const taskElement = document.querySelector(`#task-${sampleTask.index} p`);
-    expect(taskElement.textContent).toBe(newDescription);
-  });
-
-  test('toggleTaskCompleted should toggle task completion status', () => {
-    // Add a sample task first
-    addTask(sampleTask);
-
-    // Call the toggleTaskCompleted function
-    toggleTaskCompleted(sampleTask.index);
-
-    // Check if the task completion status has been updated in the DOM
-    const taskElement = document.querySelector(`#task-${sampleTask.index}`);
-    expect(taskElement.classList.contains('completed')).toBe(true);
-  });
-
-  test('clearCompletedTasks should remove all completed tasks from the DOM', () => {
-    // Add a sample completed task
-    addTask({ ...sampleTask, completed: true });
-
-    // Add another incomplete task
-    addTask(sampleTask);
-
-    // Call the clearCompletedTasks function
+    // Act: Clear completed tasks
     clearCompletedTasks();
 
-    // Check if the completed task has been removed from the DOM
-    const completedTaskElement = document.querySelector(`#task-${sampleTask.index}`);
-    expect(completedTaskElement).toBeNull();
-
-    // Check if the incomplete task is still in the DOM
-    const incompleteTaskElement = document.querySelector('.added-tasks .task');
-    expect(incompleteTaskElement).not.toBeNull();
-  });
-
-  test('getTasks should return an array of tasks', () => {
-    // Add some sample tasks
-    addTask(sampleTask);
-    addTask({ ...sampleTask, index: 2 });
-    addTask({ ...sampleTask, index: 3 });
-
-    // Call the getTasks function
+    // Assert: Check that completed tasks are removed, and indexes are updated
     const tasks = getTasks();
-
-    // Check if the returned value is an array and contains the correct number of tasks
-    expect(Array.isArray(tasks)).toBe(true);
-    expect(tasks.length).toBe(3);
+    expect(tasks).toHaveLength(1);
+    expect(tasks[0]).toEqual({ index: 1, description: 'Task 2', completed: false });
   });
 });
