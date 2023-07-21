@@ -26,6 +26,8 @@ global.document = dom.window.document;
 global.window = dom.window;
 
 // Manually define TextEncoder and TextDecoder
+global.TextEncoder = dom.window.TextEncoder;
+global.TextDecoder = dom.window.TextDecoder;
 
 
 describe('Task Manager Functions', () => {
